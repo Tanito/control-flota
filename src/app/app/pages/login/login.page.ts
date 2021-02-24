@@ -106,8 +106,6 @@ async loginIncorrecto(){
   }
 
   ingresar(){
-
-    // this.navCtrl.setRoot( HomePage );
-
+    this.navCtrl.navigateRoot( '/home' );
   }
 }
