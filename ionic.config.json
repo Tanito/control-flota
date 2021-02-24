@@ -1,5 +1,7 @@
 {
   "name": "Mi Flota",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
