@@ -13,13 +13,17 @@ export class UbicacionService {
 
   chofer: AngularFirestoreDocument<any>;
   info: any;
- 
+  private watch: Subscription;
 
   constructor(private afDB: AngularFirestore,
               private geolocation: Geolocation,
               public _usuarioProv: UsuarioService) {
 
-                this.chofer = afDB.doc(`/usuarios/${_usuarioProv.clave}`);
+              }
+              
+               inicializarChofer(){
+                 
+                 this.chofer = this.afDB.doc(`/usuarios/${this._usuarioProv.clave}`);
                }
 
   iniciarGeoLocalizacion(){
@@ -33,8 +37,8 @@ export class UbicacionService {
         clave: this._usuarioProv.clave
       })
 
-      let watch = this.geolocation.watchPosition();
-      watch.subscribe((data) => {
+      this.watch = this.geolocation.watchPosition()
+                  .subscribe((data) => {
        // data can be a set of coordinates, or an error (if an error occurred).
        // data.coords.latitude
        // data.coords.longitude
@@ -56,5 +60,14 @@ export class UbicacionService {
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+  }
+
+  detenerUbicacion(){
+    try {
+      this.watch.unsubscribe()
+
+    } catch(e){
+      console.log(JSON.stringify(e));
+    }
   }
 }

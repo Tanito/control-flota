@@ -28,7 +28,7 @@ export class UsuarioService {
     return new Promise((resolve, reject) => {
 
 
-      this.afDB.doc(`/usuarios/${clave}`)
+      this.doc = this.afDB.doc(`/usuarios/${clave}`)
         .valueChanges().subscribe(data => {
           console.log("aparezco?", data);
           // resolve();
