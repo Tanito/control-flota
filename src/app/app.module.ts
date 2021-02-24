@@ -8,6 +8,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+//Mapas
+import { AgmCoreModule } from '@agm/core';
 //Plugins
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 //Firebase
@@ -24,7 +26,10 @@ import { environment } from '../environments/environment';
             AppRoutingModule, 
             AngularFireModule.initializeApp(environment.firebase),
             AngularFirestoreModule,
-            IonicStorageModule.forRoot()],
+            IonicStorageModule.forRoot(),
+            AgmCoreModule.forRoot({
+              apiKey: 'AIzaSyDYMNbtg3vgmbRiOMYjMZLDe78jlLqTT2w'
+            })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation],
   bootstrap: [AppComponent],
 })
